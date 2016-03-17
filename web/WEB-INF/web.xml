@@ -7,10 +7,16 @@
     <servlet>
         <servlet-name>DisplayInformations</servlet-name>
         <servlet-class>DisplayInformations</servlet-class>
-        <init-param> 
-            <param-name>serverWeb</param-name> 
-            <param-value>GlassFish</param-value> 
-        </init-param> 
+        <init-param>
+            <param-name>serverWeb</param-name>
+            <param-value>GlassFish</param-value>
+        </init-param>
+        
+    </servlet>
+    
+    <servlet>
+        <servlet-name>AskNameToDisplay</servlet-name>
+        <servlet-class>AskNameToDisplay</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DisplayMessage</servlet-name>
@@ -19,6 +25,10 @@
     <servlet-mapping>
         <servlet-name>DisplayInformations</servlet-name>
         <url-pattern>/DisplayInformations</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AskNameToDisplay</servlet-name>
+        <url-pattern>/AskNameToDisplay</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
