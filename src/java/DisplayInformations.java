@@ -6,7 +6,9 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.UUID;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,8 +53,16 @@ public class DisplayInformations extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet DisplayInformations at " + request.getContextPath() + "</h1>");
+            out.println( "<p> ID session : " + session.getId() + "</p>");
+            out.println( "<p> Date : " + new Date(session.getCreationTime()) + "</p>");
             out.println( "<p> Mon prénom: " + prenom + "</p>");
+ 
             out.println( "<p> Mon Nom: " + nom + "</p>");
+            
+            String paramServerWeb;
+            ServletConfig config = getServletConfig(); 
+            paramServerWeb = config.getInitParameter("serverWeb"); 
+            out.println("<p> Serveur web utilisé: " + paramServerWeb + "</p>"); 
             out.println("</body>");
             out.println("</html>");
         }

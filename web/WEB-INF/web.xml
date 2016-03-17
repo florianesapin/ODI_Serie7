@@ -7,6 +7,10 @@
     <servlet>
         <servlet-name>DisplayInformations</servlet-name>
         <servlet-class>DisplayInformations</servlet-class>
+        <init-param> 
+            <param-name>serverWeb</param-name> 
+            <param-value>GlassFish</param-value> 
+        </init-param> 
     </servlet>
     <servlet-mapping>
         <servlet-name>DisplayMessage</servlet-name>
