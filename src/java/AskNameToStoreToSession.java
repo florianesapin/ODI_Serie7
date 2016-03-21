@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.UUID;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author floriane.sapin
  */
-public class DisplayInformations extends HttpServlet {
+public class AskNameToStoreToSession extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,34 +32,21 @@ public class DisplayInformations extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            HttpSession session = request.getSession(true);
-            UUID id = (UUID)session.getAttribute("id");
-
-
-            
-            String prenom;
-
-            
-            prenom = (String) session.getAttribute("prenom");
-
-
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet DisplayInformations</title>");            
+            out.println("<title>Servlet AskNameToDisplay</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DisplayInformations at " + request.getContextPath() + "</h1>");
-            out.println( "<p> ID session : " + session.getId() + "</p>");
-            out.println( "<p> Date : " + new Date(session.getCreationTime()) + "</p>");
-            out.println( "<p> Mon prénom: " + prenom + "</p>");
-            
-            String paramServerWeb;
-            ServletConfig config = getServletConfig(); 
-            paramServerWeb = config.getInitParameter("serverWeb"); 
-            out.println("<p> Serveur web utilisé: " + paramServerWeb + "</p>"); 
+            out.println("<h1>Servlet AskNameToDisplay at " + request.getContextPath() + "</h1>");
+
+            out.println("<form method=\"Post\" action=\"AskNameToStoreToSession\">");
+            out.println("<label>Prénom </label>");
+            out.println("<input type=\"text\" name=\"prenom\"/>");
+            out.println("<input type=\"submit\" value=\"Envoyer\"></input>");
+            out.println("</form>");
+
             out.println("</body>");
             out.println("</html>");
         }
@@ -92,7 +77,10 @@ public class DisplayInformations extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
+            response.sendRedirect(request.getContextPath() + "/DisplayInformations");
+            HttpSession session = request.getSession(true);  
+            session.setAttribute("prenom", request.getParameter("prenom"));   
         processRequest(request, response);
     }
 
